@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Janeiro</title>
+  <style>
+    body{font-family:system-ui;background:#0b0b0c;color:#f2f2f2;margin:0;padding:16px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    h1{font-size:18px;margin:0}
+    a{color:#f2f2f2;text-decoration:none;opacity:.9}
+    .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+    .cell{
+      background:#121216;border:1px solid #2a2a2a;border-radius:14px;
+      padding:12px;min-height:54px;display:flex;flex-direction:column;justify-content:space-between
+    }
+    .cell:active{transform:translateY(1px)}
+    .day{font-weight:700}
+    .mini{opacity:.7;font-size:12px}
+    .dow{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:10px}
+    .dow div{opacity:.6;font-size:12px;text-align:center}
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">←</a>
+    <h1>🗓️ Janeiro 2026</h1>
+    <a href="day.html">Hoje</a>
+  </header>
+
+  <div class="dow">
+    <div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <script>
+    // Janeiro 2026 começa numa quinta-feira? (não precisamos alinhar perfeito; mas fica melhor)
+    // Vamos alinhar pelo dia da semana real via Date.
+    const year = 2026, monthIndex = 0; // 0 = Janeiro
+    const daysInMonth = 31;
+
+    const grid = document.getElementById("grid");
+
+    const first = new Date(year, monthIndex, 1);
+    // Converte Domingo(0) para 7 para termos Seg=1..Dom=7
+    let weekday = first.getDay(); // 0..6 (Dom..Sáb)
+    weekday = weekday === 0 ? 7 : weekday; // 1..7
+    const blanks = weekday - 1; // quantos vazios antes do dia 1 (Seg=0 vazios)
+
+    for (let i=0;i<blanks;i++){
+      const div = document.createElement("div");
+      div.style.opacity = "0";
+      grid.appendChild(div);
+    }
+
+    for (let d=1; d<=daysInMonth; d++){
+      const dateStr = `${year}-${String(monthIndex+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+      const a = document.createElement("a");
+      a.href = `day.html?date=${dateStr}`;
+      a.className = "cell";
+
+      // mini estado (super leve): mostra se houve registo de calorias e ginásio
+      const calKey = `${dateStr}__calorias_ingeridas`;
+      const gymKey = `${dateStr}__ginasio`;
+      const cal = localStorage.getItem(calKey);
+      const gym = localStorage.getItem(gymKey) === "1";
+
+      a.innerHTML = `
+        <div class="day">${d}</div>
+        <div class="mini">
+          ${gym ? "🏋️" : ""}
+          ${cal ? "🍽️" : ""}
+        </div>
+      `;
+      grid.appendChild(a);
+    }
+  </script>
+</body>
+</html>
