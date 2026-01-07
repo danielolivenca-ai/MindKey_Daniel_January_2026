@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dia</title>
+  <style>
+    body{font-family:system-ui;background:#0b0b0c;color:#f2f2f2;margin:0;padding:14px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+    .btn{background:#121216;border:1px solid #2a2a2a;border-radius:12px;padding:10px 12px;color:#f2f2f2;text-decoration:none}
+    .btn:active{transform:translateY(1px)}
+    h1{font-size:16px;margin:0}
+    .sub{opacity:.7;font-size:12px;margin:6px 0 14px}
+    section{background:#121216;border:1px solid #2a2a2a;border-radius:16px;padding:12px;margin-bottom:12px}
+    h2{font-size:13px;margin:0 0 10px;opacity:.8}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+    label{font-size:14px}
+    input[type="number"], input[type="time"]{
+      background:#0f0f11;border:1px solid #2a2a2a;color:#f2f2f2;border-radius:12px;
+      padding:10px 12px;width:120px;font-size:14px;text-align:right
+    }
+    input[type="checkbox"]{transform:scale(1.5)}
+    .dose{display:flex;align-items:center;gap:8px}
+    .dose input[type="number"]{width:100px}
+    .tiny{opacity:.65;font-size:12px;margin-top:6px}
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="btn" href="month.html">Janeiro</a>
+  <div style="text-align:center">
+    <h1 id="title">📅</h1>
+    <div class="sub" id="status">Guarda automaticamente</div>
+  </div>
+  <div style="display:flex;gap:8px">
+    <button class="btn" id="prev" type="button">◀︎</button>
+    <button class="btn" id="next" type="button">▶︎</button>
+  </div>
+</header>
+
+<!-- MANHÃ -->
+<section>
+  <h2>Manhã</h2>
+  <div class="row"><label>Hora de acordar</label><input type="time" data-key="hora_acordar"></div>
+  <div class="row"><label>Peso (kg)</label><input type="number" inputmode="decimal" data-key="peso_kg"></div>
+
+  <div class="row"><label>Finasterida</label><input type="checkbox" data-key="finasterida"></div>
+  <div class="row"><label>Minoxidil</label><input type="checkbox" data-key="minoxidil"></div>
+  <div class="row"><label>Creme da cara</label><input type="checkbox" data-key="creme_cara"></div>
+  <div class="row"><label>Bomba</label><input type="checkbox" data-key="bomba"></div>
+  <div class="row"><label>Dymista</label><input type="checkbox" data-key="dymista"></div>
+
+  <div class="row"><label>Chegar ao escritório (hora)</label><input type="time" data-key="hora_escritorio"></div>
+</section>
+
+<!-- FOCO -->
+<section>
+  <h2>Foco</h2>
+  <div class="row"><label>Trabalho</label><input type="checkbox" data-key="trabalho"></div>
+  <div class="row"><label>Side Hustle</label><input type="checkbox" data-key="side_hustle"></div>
+  <div class="row"><label>Tempo de estudo (HH:MM)</label><input type="time" data-key="tempo_estudo"></div>
+</section>
+
+<!-- CORPO -->
+<section>
+  <h2>Corpo & Energia</h2>
+  <div class="row"><label>Ginásio</label><input type="checkbox" data-key="ginasio"></div>
+  <div class="row"><label>Cardio (HH:MM)</label><input type="time" data-key="cardio"></div>
+  <div class="row"><label>Passos</label><input type="number" inputmode="numeric" data-key="passos"></div>
+  <div class="row"><label>Água (litros)</label><input type="number" inputmode="decimal" step="0.1" data-key="agua_l"></div>
+  <div class="row"><label>Dormir 8h</label><input type="checkbox" data-key="dormir_8h"></div>
+  <div class="row"><label>Master Baiter (número)</label><input type="number" inputmode="numeric" data-key="master_baiter"></div>
+</section>
+
+<!-- NUTRIÇÃO -->
+<section>
+  <h2>Nutrição & Energia</h2>
+  <div class="row"><label>Calorias ingeridas (kcal)</label><input type="number" inputmode="numeric" data-key="calorias_ingeridas"></div>
+  <div class="row"><label>Calorias gastas (kcal)</label><input type="number" inputmode="numeric" data-key="calorias_gastas"></div>
+
+  <div class="row"><label>Proteína (g)</label><input type="number" inputmode="numeric" data-key="proteina_g"></div>
+  <div class="row"><label>Hidratos (g)</label><input type="number" inputmode="numeric" data-key="hidratos_g"></div>
+  <div class="row"><label>Gordura (g)</label><input type="number" inputmode="numeric" data-key="gordura_g"></div>
+
+  <div class="row"><label>Cafeína (mg)</label><input type="number" inputmode="numeric" data-key="cafeina_mg"></div>
+
+  <div class="row"><label>Bolos</label><input type="checkbox" data-key="bolos"></div>
+  <div class="row"><label>Picantes</label><input type="checkbox" data-key="picantes"></div>
+</section>
+
+<!-- SUPLEMENTOS -->
+<section>
+  <h2>Suplementos</h2>
+
+  <div class="row">
+    <label>Whey</label>
+    <div class="dose">
+      <input type="checkbox" data-key="whey_ok">
+      <input type="number" inputmode="numeric" placeholder="g" data-key="whey_g">
+    </div>
+  </div>
+
+  <div class="row">
+    <label>Creatina</label>
+    <div class="dose">
+      <input type="checkbox" data-key="creatina_ok">
+      <input type="number" inputmode="numeric" placeholder="g" data-key="creatina_g">
+    </div>
+  </div>
+
+  <div class="row">
+    <label>Ashwagandha</label>
+    <div class="dose">
+      <input type="checkbox" data-key="ashwa_ok">
+      <input type="number" inputmode="numeric" placeholder="mg" data-key="ashwa_mg">
+    </div>
+  </div>
+
+  <div class="row">
+    <label>Omega 3</label>
+    <div class="dose">
+      <input type="checkbox" data-key="omega_ok">
+      <input type="number" inputmode="numeric" placeholder="mg" data-key="omega_mg">
+    </div>
+  </div>
+
+  <div class="tiny">Dica: se não tomaste, deixa a dose em branco.</div>
+</section>
+
+<!-- SUBSTÂNCIAS -->
+<section>
+  <h2>Substâncias</h2>
+  <div class="row"><label>Fumar</label><input type="checkbox" data-key="fumar"></div>
+  <div class="row"><label>Weed</label><input type="checkbox" data-key="weed"></div>
+  <div class="row"><label>Bebi álcool</label><input type="checkbox" data-key="alcool"></div>
+</section>
+
+<!-- NOITE -->
+<section>
+  <h2>Noite</h2>
+  <div class="row"><label>Planeei o dia seguinte</label><input type="checkbox" data-key="planeei_amanha"></div>
+  <div class="row"><label>Gratidão</label><input type="checkbox" data-key="gratidao"></div>
+  <div class="row"><label>Hora de deitar</label><input type="time" data-key="hora_deitar"></div>
+</section>
+
+<script>
+  // -------- date handling --------
+  const qs = new URLSearchParams(location.search);
+  let dateStr = qs.get("date");
+
+  function isoToday() {
+    const d = new Date();
+    const tzOffset = d.getTimezoneOffset() * 60000;
+    return new Date(Date.now() - tzOffset).toISOString().slice(0,10);
+  }
+
+  if (!dateStr) dateStr = isoToday(); // default: today
+
+  function setTitle() {
+    document.getElementById("title").textContent = `📅 ${dateStr}`;
+  }
+  setTitle();
+
+  // Prev/Next (assumindo navegação fácil em Janeiro 2026; se estiver noutra data, também funciona)
+  function addDays(iso, delta){
+    const [y,m,d] = iso.split("-").map(Number);
+    const dt = new Date(y, m-1, d);
+    dt.setDate(dt.getDate() + delta);
+    const tzOffset = dt.getTimezoneOffset() * 60000;
+    return new Date(dt.getTime() - tzOffset).toISOString().slice(0,10);
+  }
+
+  document.getElementById("prev").addEventListener("click", () => {
+    const newDate = addDays(dateStr, -1);
+    location.href = `day.html?date=${newDate}`;
+  });
+
+  document.getElementById("next").addEventListener("click", () => {
+    const newDate = addDays(dateStr, 1);
+    location.href = `day.html?date=${newDate}`;
+  });
+
+  // -------- storage --------
+  const status = document.getElementById("status");
+
+  function keyFor(field){ return `${dateStr}__${field}`; }
+
+  function load(el){
+    const k = keyFor(el.dataset.key);
+    const v = localStorage.getItem(k);
+    if (el.type === "checkbox") el.checked = (v === "1");
+    else if (v !== null) el.value = v;
+  }
+
+  function save(el){
+    const k = keyFor(el.dataset.key);
+    if (el.type === "checkbox") localStorage.setItem(k, el.checked ? "1" : "0");
+    else localStorage.setItem(k, el.value);
+    status.textContent = `Guardado • ${new Date().toLocaleTimeString()}`;
+  }
+
+  document.querySelectorAll("[data-key]").forEach(el => {
+    load(el);
+    el.addEventListener("input", () => save(el));
+    el.addEventListener("change", () => save(el));
+  });
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  }
+</script>
+
+</body>
+</html>
